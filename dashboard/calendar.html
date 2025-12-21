@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calendar – Termin</title>
+
+  <link rel="stylesheet" href="../assets/css/reset.css" />
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/calendar.css" />
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">Termin</div>
+    <nav>
+      <a href="appointments.html">Appointments</a>
+      <a href="calendar.html" class="active">Calendar</a>
+      <a href="#">Customers</a>
+      <a href="#">Staff</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <header class="topbar">
+      <h1>Calendar</h1>
+    </header>
+
+    <section class="card">
+
+      <div class="calendar-header">
+        <button onclick="prevMonth()">◀</button>
+        <h2 id="monthYear"></h2>
+        <button onclick="nextMonth()">▶</button>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid">
+        <!-- JS renders calendar -->
+      </div>
+
+    </section>
+
+    <section class="card mt" id="dayDetails">
+      <h3>Appointments</h3>
+      <div id="appointmentsList">Select a date</div>
+    </section>
+
+  </main>
+</div>
+<script type="module" src="../assets/js/firebase.js"></script>
+
+<script src="../assets/js/calendar.js"></script>
+</body>
+</html>

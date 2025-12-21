@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Appointments – Termin</title>
+
+  <link rel="stylesheet" href="../assets/css/reset.css" />
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/appointments.css" />
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">Termin</div>
+
+    <nav>
+      <a href="appointments.html" class="active">Appointments</a>
+      <a href="#">Customers</a>
+      <a href="#">Staff</a>
+      <a href="#">Availability</a>
+      <a href="#">Settings</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="content">
+
+    <header class="topbar">
+      <h1>Appointments</h1>
+    </header>
+
+    <section class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Platform</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="appointmentsTable">
+          <!-- JS will inject rows -->
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+<script type="module" src="../assets/js/firebase.js"></script>
+
+<script src="../assets/js/appointments.js"></script>
+</body>
+</html>

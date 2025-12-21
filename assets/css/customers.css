@@ -1,0 +1,10 @@
+/* Table reuses dashboard styles */
+
+.action-btn {
+  padding: 6px 10px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+}

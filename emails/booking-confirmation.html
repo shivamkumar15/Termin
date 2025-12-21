@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Booking Confirmed</title>
+</head>
+<body style="font-family: Arial; background:#f8fafc; padding:30px;">
+
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+
+        <table width="420" style="background:#ffffff; border-radius:12px; padding:30px;">
+          <tr>
+            <td align="center">
+              <img src="https://dummyimage.com/60x60/2563eb/ffffff&text=T" />
+              <h2>Appointment Confirmed</h2>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <p>Hello <strong>{{name}}</strong>,</p>
+
+              <p>Your appointment has been successfully scheduled.</p>
+
+              <p>
+                <strong>Service:</strong> {{service}}<br/>
+                <strong>Date:</strong> {{date}}<br/>
+                <strong>Time:</strong> {{time}}<br/>
+                <strong>Platform:</strong> {{platform}}
+              </p>
+
+              <a href="{{meetingLink}}" 
+                 style="display:inline-block;
+                        padding:12px 18px;
+                        background:#2563eb;
+                        color:#fff;
+                        border-radius:8px;
+                        text-decoration:none;">
+                Join Meeting
+              </a>
+
+              <p style="margin-top:25px;">
+                — Termin Team
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+<script type="module" src="../assets/js/firebase.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+.content {
+  padding: 20px;
+}
+
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.staff-card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.staff-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.staff-name {
+  font-weight: bold;
+}
+
+.staff-role {
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.staff-meta {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.staff-actions button {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-bottom: 8px;
+}

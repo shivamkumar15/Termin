@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Staff – Termin</title>
+
+  <link rel="stylesheet" href="../assets/css/reset.css" />
+  <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/staff.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="../assets/images/logo.png" />
+      <span>Termin</span>
+    </div>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="appointments.html">Appointments</a>
+      <a href="customers.html">Customers</a>
+      <a class="active" href="staff.html">Staff</a>
+      <a href="availability.html">Availability</a>
+      <a href="services.html">Services</a>
+      <a href="notifications.html">Notifications</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+
+    <button class="logout" onclick="logout()">Logout</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1>Staff</h1>
+      <button class="primary-btn">+ Add Staff</button>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="content">
+      <div class="staff-grid" id="staffGrid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/staff.js"></script>
+<script type="module" src="../assets/js/firebase.js"></script>
+
+</body>
+</html>

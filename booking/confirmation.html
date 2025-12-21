@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Booking Confirmed – Termin</title>
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/booking.css" />
+</head>
+
+<body>
+    <div class="booking-container">
+        <div class="booking-card">
+            <img src="../assets/images/logo.png" class="logo" />
+            <h1>Booking Confirmed 🎉</h1>
+
+            <p id="details"></p>
+
+            <a class="primary-btn" href="../auth/login.html"> Go to Dashboard </a>
+        </div>
+    </div>
+    <div class="row-between mt">
+        <strong>Meeting Platform</strong>
+        <span id="platform"></span>
+    </div>
+
+    <a id="joinBtn" class="primary-btn mt" target="_blank"> Join Meeting </a>
+    <p class="muted">📩 A confirmation email has been sent to your inbox.</p>
+
+    <p class="muted">
+        📩 Confirmation sent to customer <br />
+        🔔 Admin has been notified
+    </p>
+
+    <script>
+        const booking = JSON.parse(localStorage.getItem("termin_booking"));
+
+        document.getElementById("details").innerHTML = `
+    <strong>${booking.service}</strong><br>
+    ${booking.date} at ${booking.time}<br><br>
+    Confirmation sent to <strong>${booking.email}</strong>
+  `;
+        document.getElementById("platform").innerText = booking.platform;
+        document.getElementById("joinBtn").href = booking.meetingLink;
+    </script>
+    <script type="module" src="../assets/js/firebase.js"></script>
+<script type="module" src="../assets/js/test-db.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 30px;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* MAIN */
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+.topbar {
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.platform {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  background: #e0e7ff;
+  color: #1e40af;
+}
+
+.join-btn {
+  padding: 6px 12px;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+}
