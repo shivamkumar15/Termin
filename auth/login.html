@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Login – Termin</title>
-
-  <link rel="stylesheet" href="../assets/css/reset.css" />
-  <link rel="stylesheet" href="../assets/css/variables.css" />
-  <link rel="stylesheet" href="../assets/css/auth.css" />
+  <meta charset="UTF-8">
+  <title>Admin Login – Termin</title>
 </head>
 <body>
 
-  <div class="auth-container">
-    <div class="auth-card">
+<h2> Admin Login</h2>
 
-      <img src="../assets/images/logo.png" alt="Termin Logo" class="logo" />
-      <h1>Termin</h1>
-      <p>Sign in to manage your appointments</p>
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Email" required />
+  <br><br>
+  <input type="password" id="password" placeholder="Password" required />
+  <br><br>
+  <button type="submit">Login</button>
+</form>
 
-      <button class="oauth-btn">Continue with Google</button>
-      <button class="oauth-btn">Continue with GitHub</button>
+<p id="error" style="color:red;"></p>
 
-      <div class="divider">or</div>
+<script type="module" src="../assets/js/firebase.js"></script>
+<script type="module" src="../assets/js/auth.js"></script>
 
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-
-      <button class="primary-btn" onclick="login()">Sign In</button>
-
-    </div>
-  </div>
-
-  <script src="../assets/js/auth.js"></script>
 </body>
 </html>

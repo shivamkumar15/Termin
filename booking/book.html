@@ -10,88 +10,80 @@
 </head>
 <body>
 
-<div class="booking-container">
+<form id="bookingForm" class="booking-card">
 
-  <div class="booking-card">
-    <img src="../assets/images/logo.png" class="logo" />
-    <h1>Book an Appointment</h1>
+  <img src="../assets/images/logo.png" class="logo" />
+  <h1>Book an Appointment</h1>
 
-    <!-- STEP 1 -->
-    <div class="step">
-      <label>Service</label>
-      <select id="service">
-        <option>Consultation</option>
-        <option>Follow-up</option>
-        <option>Therapy Session</option>
-      </select>
-    </div>
-    <div class="step">
-  <label>Meeting Platform</label>
-
-  <div class="platforms">
-    <label class="platform-card">
-      <input type="radio" name="platform" value="Google Meet" checked />
-      <span>Google Meet</span>
-    </label>
-
-    <label class="platform-card">
-      <input type="radio" name="platform" value="Zoom" />
-      <span>Zoom</span>
-    </label>
-
-    <label class="platform-card">
-      <input type="radio" name="platform" value="Teams" />
-      <span>Microsoft Teams</span>
-    </label>
-
-    <label class="platform-card">
-      <input type="radio" name="platform" value="Custom" />
-      <span>Custom Link</span>
-    </label>
+  <!-- STEP 1 -->
+  <div class="step">
+    <label>Service</label>
+    <select id="service">
+      <option>Consultation</option>
+      <option>Follow-up</option>
+      <option>Therapy Session</option>
+    </select>
   </div>
-</div>
 
+  <!-- PLATFORM -->
+  <div class="step">
+    <label>Meeting Platform</label>
+    <div class="platforms">
+      <label class="platform-card">
+        <input type="radio" name="platform" value="Google Meet" checked />
+        <span>Google Meet</span>
+      </label>
 
-    <!-- STEP 2 -->
-    <div class="step">
-      <label>Date</label>
-      <input type="date" id="date" />
+      <label class="platform-card">
+        <input type="radio" name="platform" value="Zoom" />
+        <span>Zoom</span>
+      </label>
+
+      <label class="platform-card">
+        <input type="radio" name="platform" value="Teams" />
+        <span>Microsoft Teams</span>
+      </label>
+
+      <label class="platform-card">
+        <input type="radio" name="platform" value="Custom" />
+        <span>Custom Link</span>
+      </label>
     </div>
-
-    <!-- STEP 3 -->
-    <div class="step">
-      <label>Time</label>
-      <select id="time">
-  <option>Select a date first</option>
-</select>
-
-    </div>
-
-    <!-- STEP 4 -->
-    <div class="step">
-      <label>Your Name</label>
-      <input type="text" id="name" />
-    </div>
-
-    <div class="step">
-      <label>Email</label>
-      <input type="email" id="email" />
-    </div>
-
-    
-    <button class="primary-btn" id="submitBtn" onclick="submitBooking()">
-  Confirm Booking
-</button>
-
-
   </div>
-</div>
 
-<script src="../assets/js/booking.js"></script>
+  <!-- DATE -->
+  <div class="step">
+    <label>Date</label>
+    <input type="date" id="date" />
+  </div>
+
+  <!-- TIME -->
+  <div class="step">
+    <label>Time</label>
+    <select id="time">
+      <option>Select a date first</option>
+    </select>
+  </div>
+
+  <!-- NAME -->
+  <div class="step">
+    <label>Your Name</label>
+    <input type="text" id="name" />
+  </div>
+
+  <!-- EMAIL -->
+  <div class="step">
+    <label>Email</label>
+    <input type="email" id="email" />
+  </div>
+
+  <button type="submit">Confirm Booking</button>
+
+</form>
+
+
 <script src="../assets/js/email.js"></script>
 <script type="module" src="../assets/js/firebase.js"></script>
-
-
 <script type="module" src="../assets/js/booking.js"></script>
 
 </body>
