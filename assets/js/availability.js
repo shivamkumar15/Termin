@@ -1,49 +1,37 @@
-const days = [
-  "Monday", "Tuesday", "Wednesday",
-  "Thursday", "Friday", "Saturday", "Sunday"
-];
+import { db } from "./firebase.js";
+import { auth } from "./firebase.js";
+import { onAuthStateChanged } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const container = document.getElementById("availabilityTable");
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "/auth/login.html";
+  }
+});
 
-const saved = JSON.parse(localStorage.getItem("termin_availability"));
+import {
+  doc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-function renderAvailability() {
-  container.innerHTML = "";
+const form = document.getElementById("availabilityForm");
 
-  days.forEach(day => {
-    const data = saved?.[day] || {
-      enabled: day !== "Sunday",
-      start: "09:00",
-      end: "17:00"
-    };
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    container.innerHTML += `
-      <div class="row">
-        <label>${day}</label>
-        <input type="checkbox" ${data.enabled ? "checked" : ""} data-day="${day}" />
-        <input type="time" value="${data.start}" data-start="${day}" />
-        <input type="time" value="${data.end}" data-end="${day}" />
-      </div>
-    `;
-  });
-}
-
-function saveAvailability() {
   const availability = {};
-  const duration = document.getElementById("slotDuration").value;
 
-  days.forEach(day => {
-    availability[day] = {
-      enabled: document.querySelector(`[data-day="${day}"]`).checked,
-      start: document.querySelector(`[data-start="${day}"]`).value,
-      end: document.querySelector(`[data-end="${day}"]`).value
-    };
+  document.querySelectorAll("input[data-day]").forEach(input => {
+    const day = input.dataset.day;
+    const times = input.value
+      .split(",")
+      .map(t => t.trim())
+      .filter(Boolean);
+
+    availability[day] = times;
   });
 
-  availability.slotDuration = duration;
+  await setDoc(doc(db, "availability", "default"), availability);
 
-  localStorage.setItem("termin_availability", JSON.stringify(availability));
-  alert("Availability saved!");
-}
-
-renderAvailability();
+  alert("Availability saved");
+});

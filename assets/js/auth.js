@@ -14,7 +14,7 @@ form.addEventListener("submit", async (e) => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "admin.html";
+    window.location.href = "/booking/admin.html";
   } catch (error) {
     errorText.textContent = error.message;
   }

@@ -1,46 +1,79 @@
-import { db } from "./firebase.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { auth, db } from "./firebase.js";
+
 import {
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { auth } from "./firebase.js";
-import {
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+//  Protect admin page
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "login.html";
+    window.location.href = "/auth/login.html";
+  } else {
+    loadBookings();
   }
 });
 
+//  Load bookings
+async function loadBookings() {
+  const table = document.getElementById("bookingsTable");
+  table.innerHTML = "";
 
-const table = document.getElementById("bookingTable");
+  const q = query(
+    collection(db, "bookings"),
+    orderBy("createdAt", "desc")
+  );
 
-const loadBookings = async () => {
-  const querySnapshot = await getDocs(collection(db, "bookings"));
+  const snapshot = await getDocs(q);
 
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
+  snapshot.forEach((docSnap) => {
+    const b = docSnap.data();
+    const id = docSnap.id;
 
-    const row = `
+    table.innerHTML += `
       <tr>
-        <td>${data.name}</td>
-        <td>${data.email}</td>
-        <td>${data.service}</td>
-        <td>${data.date}</td>
-        <td>${data.time}</td>
-        <td>${data.platform}</td>
+        <td>${b.name}</td>
+        <td>${b.email}</td>
+        <td>${b.service}</td>
+        <td>${b.date}</td>
+        <td>${b.time}</td>
+        <td>${b.platform}</td>
+        <td>
+          <button data-id="${id}" class="delete-btn">Delete</button>
+        </td>
       </tr>
     `;
-
-    table.innerHTML += row;
   });
-};
+
+  attachDeleteEvents();
+}
+
+//  DELETE booking
+function attachDeleteEvents() {
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const bookingId = btn.dataset.id;
+
+      const confirmDelete = confirm("Delete this booking?");
+      if (!confirmDelete) return;
+
+      await deleteDoc(doc(db, "bookings", bookingId));
+      loadBookings(); // refresh table
+    });
+  });
+}
+
+//  Logout
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "login.html";
 });
-
-loadBookings();

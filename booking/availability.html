@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Availability – Termin</title>
+  <link rel="stylesheet" href="../assets/css/availability.css" />
+</head>
+<body>
+
+<h1>Set Weekly Availability</h1>
+
+<form id="availabilityForm">
+
+  <div class="day">
+    <label>Monday</label>
+    <input type="text" placeholder="10:00,11:00,12:00" data-day="Monday" />
+  </div>
+
+  <div class="day">
+    <label>Tuesday</label>
+    <input type="text" placeholder="14:00,15:00" data-day="Tuesday" />
+  </div>
+
+  <div class="day">
+    <label>Wednesday</label>
+    <input type="text" data-day="Wednesday" />
+  </div>
+
+  <div class="day">
+    <label>Thursday</label>
+    <input type="text" data-day="Thursday" />
+  </div>
+
+  <div class="day">
+    <label>Friday</label>
+    <input type="text" data-day="Friday" />
+  </div>
+
+  <button type="submit">Save Availability</button>
+
+</form>
+
+<script type="module" src="../assets/js/availability.js"></script>
+</body>
+</html>

@@ -23,5 +23,5 @@ form.addEventListener("submit", async (e) => {
 
   await addDoc(collection(db, "bookings"), bookingData);
 
-  alert("✅ Booking saved to Firestore!");
+  alert(" Booking saved to Firestore!");
 });
