@@ -6,34 +6,47 @@
 </head>
 <body>
 
-<h1>Set Weekly Availability</h1>
+<h1>Service Availability</h1>
 
 <form id="availabilityForm">
 
+  <label>Service</label>
+  <select id="serviceSelect">
+    <option>Consultation</option>
+    <option>Therapy Session</option>
+    <option>Follow-up</option>
+  </select>
+
+  <hr />
+
   <div class="day">
     <label>Monday</label>
-    <input type="text" placeholder="10:00,11:00,12:00" data-day="Monday" />
+    <input data-day="Monday" placeholder="10:00,11:00" />
   </div>
 
   <div class="day">
     <label>Tuesday</label>
-    <input type="text" placeholder="14:00,15:00" data-day="Tuesday" />
+    <input data-day="Tuesday" />
   </div>
 
   <div class="day">
     <label>Wednesday</label>
-    <input type="text" data-day="Wednesday" />
+    <input data-day="Wednesday" />
   </div>
 
   <div class="day">
     <label>Thursday</label>
-    <input type="text" data-day="Thursday" />
+    <input data-day="Thursday" />
   </div>
 
   <div class="day">
     <label>Friday</label>
-    <input type="text" data-day="Friday" />
+    <input data-day="Friday" />
   </div>
+
+  <button type="submit">Save Availability</button>
+</form>
+
 
   <button type="submit">Save Availability</button>
 

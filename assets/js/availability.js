@@ -1,37 +1,68 @@
-import { db } from "./firebase.js";
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { onAuthStateChanged } from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "/auth/login.html";
-  }
-});
-
 import {
   doc,
-  setDoc
+  setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const form = document.getElementById("availabilityForm");
+//  Protect admin
+onAuthStateChanged(auth, (user) => {
+  if (!user) window.location.href = "login.html";
+});
 
+const form = document.getElementById("availabilityForm");
+const serviceSelect = document.getElementById("serviceSelect");
+
+// Load service availability
+const loadAvailability = async () => {
+  const ref = doc(db, "availability", "services");
+  const snap = await getDoc(ref);
+
+  document.querySelectorAll("input[data-day]").forEach(i => i.value = "");
+
+  if (!snap.exists()) return;
+
+  const data = snap.data();
+  const serviceData = data[serviceSelect.value];
+
+  if (!serviceData) return;
+
+  Object.keys(serviceData).forEach(day => {
+    const input = document.querySelector(`input[data-day="${day}"]`);
+    if (input) input.value = serviceData[day].join(", ");
+  });
+};
+
+serviceSelect.addEventListener("change", loadAvailability);
+loadAvailability();
+
+// Save availability
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const availability = {};
+  const ref = doc(db, "availability", "services");
+  const snap = await getDoc(ref);
+  const existing = snap.exists() ? snap.data() : {};
+
+  const serviceAvailability = {};
 
   document.querySelectorAll("input[data-day]").forEach(input => {
-    const day = input.dataset.day;
     const times = input.value
       .split(",")
       .map(t => t.trim())
       .filter(Boolean);
 
-    availability[day] = times;
+    if (times.length) {
+      serviceAvailability[input.dataset.day] = times;
+    }
   });
 
-  await setDoc(doc(db, "availability", "default"), availability);
+  existing[serviceSelect.value] = serviceAvailability;
 
-  alert("Availability saved");
+  await setDoc(ref, existing);
+
+  alert("Service availability saved");
 });

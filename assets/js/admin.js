@@ -75,5 +75,5 @@ function attachDeleteEvents() {
 //  Logout
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   await signOut(auth);
-  window.location.href = "login.html";
+  window.location.href = "./auth/login.html";
 });

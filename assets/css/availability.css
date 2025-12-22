@@ -23,3 +23,25 @@ input[type="time"] {
   gap: 15px;
   align-items: center;
 }
+.day {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+select {
+  margin-bottom: 20px;
+}
+/* 📱 Mobile Availability */
+@media (max-width: 600px) {
+
+  .day {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+}

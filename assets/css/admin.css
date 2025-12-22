@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+th, td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+}
+
+th {
+  background: #f9fafb;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.delete-btn {
+  background: #ef4444;
+}
+/* 📱 Mobile Admin Table */
+@media (max-width: 768px) {
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
