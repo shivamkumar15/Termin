@@ -1,98 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Book Appointment – Termin</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Appointment – Termin</title>
 
-  <link rel="stylesheet" href="../assets/css/reset.css" />
-  <link rel="stylesheet" href="../assets/css/variables.css" />
-  <link rel="stylesheet" href="../assets/css/booking.css" />
-  <link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/components.css">
-  
-</head>
-<body>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/booking.css" />
+    <link rel="stylesheet" href="../assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+  </head>
+  <body>
+    <form id="bookingForm" class="booking-card">
+      <img src="../assets/images/logo.png" class="logo" >
+      <h1>Book an Appointment</h1>
 
-<form id="bookingForm" class="booking-card">
+      <!-- STEP 1 -->
+      <div class="step">
+        <label>Service</label>
+        <select id="service">
+          <option>Consultation</option>
+          <option>Follow-up</option>
+          <option>Therapy Session</option>
+        </select>
+      </div>
 
-  <img src="../assets/images/logo.png" class="logo" />
-  <h1>Book an Appointment</h1>
+      <!-- PLATFORM -->
+      <div class="step">
+        <label>Meeting Platform</label>
+        <div class="platforms">
+          <label class="platform-card">
+            <input type="radio" name="platform" value="Google Meet" checked />
+            <span>Google Meet</span>
+          </label>
 
-  <!-- STEP 1 -->
-  <div class="step">
-    <label>Service</label>
-    <select id="service">
-      <option>Consultation</option>
-      <option>Follow-up</option>
-      <option>Therapy Session</option>
-    </select>
-  </div>
+          <label class="platform-card">
+            <input type="radio" name="platform" value="Zoom" />
+            <span>Zoom</span>
+          </label>
 
-  <!-- PLATFORM -->
-  <div class="step">
-    <label>Meeting Platform</label>
-    <div class="platforms">
-      <label class="platform-card">
-        <input type="radio" name="platform" value="Google Meet" checked />
-        <span>Google Meet</span>
-      </label>
+          <label class="platform-card">
+            <input type="radio" name="platform" value="Teams" />
+            <span>Microsoft Teams</span>
+          </label>
 
-      <label class="platform-card">
-        <input type="radio" name="platform" value="Zoom" />
-        <span>Zoom</span>
-      </label>
+          <label class="platform-card">
+            <input type="radio" name="platform" value="Custom" />
+            <span>Custom Link</span>
+          </label>
+        </div>
+      </div>
 
-      <label class="platform-card">
-        <input type="radio" name="platform" value="Teams" />
-        <span>Microsoft Teams</span>
-      </label>
+      <!-- DATE -->
+      <div class="step">
+        <label>Date</label>
+        <input type="date" id="date" />
+      </div>
 
-      <label class="platform-card">
-        <input type="radio" name="platform" value="Custom" />
-        <span>Custom Link</span>
-      </label>
-    </div>
-  </div>
+      <!-- TIME -->
+      <div class="step">
+        <label>Time</label>
+        <select id="time">
+          <option>Select a date first</option>
+        </select>
+      </div>
 
-  <!-- DATE -->
-  <div class="step">
-    <label>Date</label>
-    <input type="date" id="date" />
-  </div>
+      <!-- NAME -->
+      <div class="step">
+        <label>Your Name</label>
+        <input type="text" id="name" />
+      </div>
 
-  <!-- TIME -->
-  <div class="step">
-    <label>Time</label>
-    <select id="time">
-      <option>Select a date first</option>
-    </select>
-  </div>
+      <!-- EMAIL -->
+      <div class="step">
+        <label>Email</label>
+        <input type="email" id="email" />
+      </div>
 
-  <!-- NAME -->
-  <div class="step">
-    <label>Your Name</label>
-    <input type="text" id="name" />
-  </div>
+      <button type="submit">Confirm Booking</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      emailjs.init("0z5BqqQT41NZmLiHj");
+    </script>
 
-  <!-- EMAIL -->
-  <div class="step">
-    <label>Email</label>
-    <input type="email" id="email" />
-  </div>
-
-  <button type="submit">Confirm Booking</button>
-
-</form>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("0z5BqqQT41NZmLiHj");
-</script>
-
-
-
-<script src="../assets/js/email.js"></script>
-<script type="module" src="../assets/js/firebase.js"></script>
-<script type="module" src="../assets/js/booking.js"></script>
-
-</body>
+    <script type="module" src="../assets/js/email.js"></script>
+    <script type="module" src="../assets/js/firebase.js"></script>
+    <script type="module" src="../assets/js/booking.js"></script>
+  </body>
 </html>
