@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
   <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
   <link rel="stylesheet" href="../assets/css/appointments.css" />
 </head>
 
@@ -22,74 +23,193 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="../assets/images/logo.png" alt="Termin" />
+        <i class="ri-calendar-check-fill"></i> Termin
       </div>
 
-      <nav>
-        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
-        <a class="active" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
-        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
-        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
-        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
-        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a class="nav-item active" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a class="nav-item" href="services.html"><i class="ri-service-line"></i> Services</a>
+        <a class="nav-item" href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a class="nav-item" href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a class="nav-item" href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a class="nav-item" href="payments.html"><i class="ri-bank-card-line"></i> Payments</a>
       </nav>
 
       <div class="sidebar-footer">
-        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
-        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
-        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+        <a class="nav-item" href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a class="nav-item" href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="nav-item logout-btn" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
       </div>
     </aside>
 
     <!-- MAIN -->
-    <main class="main">
+    <main class="main-content">
 
       <!-- TOPBAR -->
       <header class="topbar">
-        <div class="page-title">
-          <h1>Appointments</h1>
-          <p>Manage your upcoming bookings.</p>
+        <div class="page-header">
+          <h1>Appointments Management</h1>
         </div>
 
-        <div class="topbar-right">
-          <div class="search-box">
+        <div class="topbar-actions">
+          <button class="btn btn-primary">
+            <i class="ri-add-line"></i> Create Appointment
+          </button>
+          <div class="search-bar">
             <i class="ri-search-line"></i>
-            <input type="text" placeholder="Search bookings..." />
+            <input type="text" placeholder="Search..." />
           </div>
-          <div class="avatar">
-            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          <button class="notification-btn">
+            <i class="ri-notification-3-line"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="user-profile">
+            <img class="user-avatar" src="https://ui-avatars.com/api/?name=Raman+Singh&background=06b6d4&color=fff"
+              alt="User" />
           </div>
         </div>
       </header>
 
       <!-- CONTENT -->
-      <section class="content">
+      <section class="container-fluid">
 
-        <div class="card">
-          <div class="card-header">
-            <h2>All Appointments</h2>
-            <div class="actions">
-              <!-- Add filters or buttons here if needed -->
+        <!-- FILTERS BAR -->
+        <div class="filters-container">
+          <div class="filters-left">
+            <div class="date-picker">
+              <button class="btn btn-secondary btn-sm">
+                <i class="ri-arrow-left-s-line"></i>
+              </button>
+              <span style="font-weight:500; padding: 0 0.5rem;">December 20th, 2025</span>
+              <button class="btn btn-secondary btn-sm">
+                <i class="ri-arrow-right-s-line"></i>
+              </button>
+            </div>
+            <select class="form-select" style="width: auto; min-width: 120px;">
+              <option>All Staff</option>
+              <option>Dr. Smith</option>
+            </select>
+            <select class="form-select" style="width: auto; min-width: 130px;">
+              <option>All Services</option>
+              <option>Consultation</option>
+            </select>
+            <select class="form-select" style="width: auto; min-width: 130px;">
+              <option>All Statuses</option>
+              <option>Confirmed</option>
+              <option>Pending</option>
+              <option>Cancelled</option>
+            </select>
+            <div class="search-input-group">
+              <i class="ri-search-line"></i>
+              <input type="text" class="form-input" placeholder="Search appointments..." />
             </div>
           </div>
 
-          <div class="table-wrapper">
-            <table>
+          <div class="filters-right">
+            <div class="view-toggle">
+              <button class="view-btn active">Calendar</button>
+              <button class="view-btn">List</button>
+            </div>
+            <button class="btn btn-secondary btn-sm">
+              <i class="ri-download-2-line"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <!-- TABLE CARD -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
               <thead>
                 <tr>
-                  <th>Customer</th>
+                  <th class="col-checkbox"><input type="checkbox" id="selectAll"></th>
+                  <th>Client</th>
                   <th>Service</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Platform</th>
-                  <th>Action</th>
+                  <th>Status</th>
+                  <th class="col-actions">Actions</th>
                 </tr>
               </thead>
 
               <tbody id="appointmentsTable">
-                <!-- JS will inject rows -->
+                <!-- JS will inject rows. Below is static placeholder. -->
+                <tr>
+                  <td class="col-checkbox"><input type="checkbox"></td>
+                  <td>
+                    <div class="client-info">
+                      <img src="https://ui-avatars.com/api/?name=Alice+Johnson&background=random" alt="Alice">
+                      <div class="client-text">
+                        <h4>Alice Johnson</h4>
+                        <p>10:00 AM</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Consultation</td>
+                  <td><span class="badge badge-success">Confirmed</span></td>
+                  <td class="col-actions">
+                    <button class="btn-icon"><i class="ri-check-line"></i></button>
+                    <button class="btn-icon"><i class="ri-time-line"></i></button>
+                    <button class="btn-icon"><i class="ri-close-line"></i></button>
+                    <button class="btn-icon"><i class="ri-pencil-line"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-checkbox"><input type="checkbox"></td>
+                  <td>
+                    <div class="client-info">
+                      <img src="https://ui-avatars.com/api/?name=Bob+Williams&background=random" alt="Bob">
+                      <div class="client-text">
+                        <h4>Bob Williams</h4>
+                        <p>11:30 AM</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Follow-up</td>
+                  <td><span class="badge badge-warning">Pending</span></td>
+                  <td class="col-actions">
+                    <button class="btn-icon"><i class="ri-check-line"></i></button>
+                    <button class="btn-icon"><i class="ri-time-line"></i></button>
+                    <button class="btn-icon"><i class="ri-close-line"></i></button>
+                    <button class="btn-icon"><i class="ri-pencil-line"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-checkbox"><input type="checkbox"></td>
+                  <td>
+                    <div class="client-info">
+                      <img src="https://ui-avatars.com/api/?name=Charlie+Brown&background=random" alt="Charlie">
+                      <div class="client-text">
+                        <h4>Charlie Brown</h4>
+                        <p>01:00 PM</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Therapy Session</td>
+                  <td><span class="badge badge-danger">Cancelled</span></td>
+                  <td class="col-actions">
+                    <button class="btn-icon"><i class="ri-check-line"></i></button>
+                    <button class="btn-icon"><i class="ri-time-line"></i></button>
+                    <button class="btn-icon"><i class="ri-close-line"></i></button>
+                    <button class="btn-icon"><i class="ri-pencil-line"></i></button>
+                  </td>
+                </tr>
               </tbody>
             </table>
+          </div>
+
+          <!-- PAGINATION -->
+          <div class="pagination">
+            <div class="bulk-select-wrapper">
+              <button class="btn btn-secondary btn-sm" disabled>Reschedule Selected (0)</button>
+              <button class="btn btn-danger btn-sm" disabled>Cancel Selected (0)</button>
+            </div>
+            <div class="pagination-controls">
+              <button class="page-btn"><i class="ri-arrow-left-s-line"></i></button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn"><i class="ri-arrow-right-s-line"></i></button>
+            </div>
           </div>
         </div>
 

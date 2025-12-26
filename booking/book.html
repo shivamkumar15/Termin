@@ -6,154 +6,207 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Appointment – Termin</title>
 
-  <!-- ICONS -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css">
   <link rel="stylesheet" href="../assets/css/variables.css">
-  <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/booking.css">
 </head>
 
 <body>
 
-  <div class="booking-container">
-    <!-- SIDEBAR -->
-    <div class="booking-sidebar">
-      <div class="logo">
-        <img src="../assets/images/logo.png" alt="Termin">
-      </div>
+  <!-- PAGE HEADER -->
+  <header class="booking-header">
+    <div class="logo">
+      <i class="ri-calendar-check-fill"></i> AppointFlow
+    </div>
+    <h1>AppointFlow</h1>
+    <p>Streamline your bookings with ease. Select your service, pick a time, and let us handle the rest.</p>
+  </header>
 
-      <div class="booking-summary">
-        <h2>Booking Details</h2>
-        <div class="summary-item" id="summaryService">
-          <i class="ri-briefcase-line"></i>
-          <span>Select a service...</span>
+  <!-- MAIN CONTENT -->
+  <main class="booking-content">
+
+    <!-- SERVICE CARDS GRID (Step 1) -->
+    <div id="step-services">
+      <div class="service-cards-grid" id="serviceGrid">
+        <!-- JS populates these, but here are static placeholders -->
+        <div class="booking-service-card">
+          <h3>Standard Consultation</h3>
+          <p class="desc">A comprehensive session to discuss your needs and provide initial advice.</p>
+          <div class="meta">
+            <span>60 min</span>
+            <span class="price">$99.00</span>
+          </div>
+          <button class="select-btn">Select Service</button>
         </div>
-        <div class="summary-item" id="summaryDate">
-          <i class="ri-calendar-line"></i>
-          <span>Select a date...</span>
+
+        <div class="booking-service-card">
+          <h3>Follow-up Session</h3>
+          <p class="desc">A shorter follow-up for reviewing progress, or addressing new questions.</p>
+          <div class="meta">
+            <span>30 min</span>
+            <span class="price">$50.00</span>
+          </div>
+          <button class="select-btn">Select Service</button>
         </div>
-        <div class="summary-item" id="summaryTime">
-          <i class="ri-time-line"></i>
-          <span>Select a time...</span>
+
+        <div class="booking-service-card">
+          <h3>Project Kick-off</h3>
+          <p class="desc">An in-depth meeting to define project scope, goals, and team roles.</p>
+          <div class="meta">
+            <span>90 min</span>
+            <span class="price">$150.00</span>
+          </div>
+          <button class="select-btn">Select Service</button>
         </div>
-        <div class="summary-item" id="summaryPlatform">
-          <i class="ri-video-chat-line"></i>
-          <span>Select platform...</span>
+
+        <div class="booking-service-card">
+          <h3>Discovery Call</h3>
+          <p class="desc">A quick chat to explore potential collaborations and service fit.</p>
+          <div class="meta">
+            <span>15 min</span>
+            <span class="price">$0.00</span>
+          </div>
+          <button class="select-btn">Select Service</button>
         </div>
       </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="booking-main">
+    <!-- WIZARD CONTAINER (Hidden, shown after service selection) -->
+    <div class="booking-wizard-container" id="wizardContainer" style="display: none;">
 
-      <!-- STEP 1: SERVICE -->
-      <div class="step-content active" id="step1">
-        <h1>Select Service</h1>
-        <p class="subtitle">Choose the type of appointment you need.</p>
-
-        <div class="selection-grid" id="serviceGrid">
-          <!-- Injected via JS -->
+      <!-- SIDEBAR -->
+      <div class="booking-sidebar">
+        <div class="logo">
+          <i class="ri-calendar-check-fill"></i> Termin
         </div>
 
-        <div class="form-actions">
-          <button class="primary-btn" onclick="nextStep(2)" id="btnStep1" disabled>Next <i
-              class="ri-arrow-right-line"></i></button>
-        </div>
-      </div>
-
-      <!-- STEP 2: PLATFORM -->
-      <div class="step-content" id="step2">
-        <h1>Select Platform</h1>
-        <p class="subtitle">Where would you like to meet?</p>
-
-        <div class="selection-grid" id="platformGrid">
-          <div class="selection-card" onclick="selectPlatform('Google Meet', this)">
-            <i class="ri-google-fill"></i>
-            <h3>Google Meet</h3>
+        <div class="booking-summary">
+          <h2>Booking Details</h2>
+          <div class="summary-item" id="summaryService">
+            <i class="ri-briefcase-line"></i>
+            <span>Select a service...</span>
           </div>
-          <div class="selection-card" onclick="selectPlatform('Zoom', this)">
-            <i class="ri-video-chat-fill"></i>
-            <h3>Zoom</h3>
+          <div class="summary-item" id="summaryDate">
+            <i class="ri-calendar-line"></i>
+            <span>Select a date...</span>
           </div>
-          <div class="selection-card" onclick="selectPlatform('Microsoft Teams', this)">
-            <i class="ri-microsoft-fill"></i>
-            <h3>Microsoft Teams</h3>
+          <div class="summary-item" id="summaryTime">
+            <i class="ri-time-line"></i>
+            <span>Select a time...</span>
           </div>
-          <div class="selection-card" onclick="selectPlatform('Phone Call', this)">
-            <i class="ri-phone-line"></i>
-            <h3>Phone Call</h3>
+          <div class="summary-item" id="summaryPlatform">
+            <i class="ri-video-chat-line"></i>
+            <span>Select platform...</span>
           </div>
-        </div>
-
-        <div class="form-actions">
-          <button class="secondary-btn" onclick="prevStep(1)">Back</button>
-          <button class="primary-btn" onclick="nextStep(3)" id="btnStep2" disabled>Next <i
-              class="ri-arrow-right-line"></i></button>
         </div>
       </div>
 
-      <!-- STEP 3: DATE & TIME -->
-      <div class="step-content" id="step3">
-        <h1>Select Date & Time</h1>
-        <p class="subtitle">Pick a slot that works for you.</p>
+      <!-- MAIN WIZARD -->
+      <div class="booking-main">
 
-        <div class="date-time-container">
-          <div class="calendar-wrapper">
-            <input type="date" id="datePicker" class="full-width" />
-          </div>
-          <div class="slots-wrapper" id="slotsContainer">
-            <p style="text-align: center; color: #999; margin-top: 2rem;">Select a date to see available times.</p>
-          </div>
-        </div>
+        <!-- STEP 2: PLATFORM -->
+        <div class="step-content active" id="step2">
+          <h1>Select Platform</h1>
+          <p class="subtitle">Where would you like to meet?</p>
 
-        <div class="form-actions">
-          <button class="secondary-btn" onclick="prevStep(2)">Back</button>
-          <button class="primary-btn" onclick="nextStep(4)" id="btnStep3" disabled>Next <i
-              class="ri-arrow-right-line"></i></button>
-        </div>
-      </div>
-
-      <!-- STEP 4: DETAILS -->
-      <div class="step-content" id="step4">
-        <h1>Your Details</h1>
-        <p class="subtitle">Tell us a bit about yourself.</p>
-
-        <form id="bookingForm">
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="customerName" required placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="customerEmail" required placeholder="john@example.com">
-          </div>
-          <div class="form-group">
-            <label>Notes (Optional)</label>
-            <textarea id="customerNotes" rows="3"></textarea>
+          <div class="selection-grid" id="platformGrid">
+            <div class="selection-card" onclick="selectPlatform('Google Meet', this)">
+              <i class="ri-google-fill"></i>
+              <h3>Google Meet</h3>
+            </div>
+            <div class="selection-card" onclick="selectPlatform('Zoom', this)">
+              <i class="ri-video-chat-fill"></i>
+              <h3>Zoom</h3>
+            </div>
+            <div class="selection-card" onclick="selectPlatform('Microsoft Teams', this)">
+              <i class="ri-microsoft-fill"></i>
+              <h3>Microsoft Teams</h3>
+            </div>
+            <div class="selection-card" onclick="selectPlatform('Phone Call', this)">
+              <i class="ri-phone-line"></i>
+              <h3>Phone Call</h3>
+            </div>
           </div>
 
           <div class="form-actions">
-            <button type="button" class="secondary-btn" onclick="prevStep(3)">Back</button>
-            <button type="submit" class="primary-btn">Confirm Booking</button>
+            <button class="btn btn-secondary" onclick="backToServices()">Back</button>
+            <button class="btn btn-primary" onclick="nextStep(3)" id="btnStep2" disabled>Next <i
+                class="ri-arrow-right-line"></i></button>
           </div>
-        </form>
-      </div>
-
-      <!-- LOADING / SUCCESS -->
-      <div class="step-content" id="stepSuccess">
-        <div style="text-align: center; padding: 3rem;">
-          <i class="ri-checkbox-circle-fill" style="font-size: 4rem; color: var(--success);"></i>
-          <h1>Booking Confirmed!</h1>
-          <p class="subtitle">Check your email for the invitation.</p>
-          <a href="../index.html" class="primary-btn">Return Home</a>
         </div>
-      </div>
 
+        <!-- STEP 3: DATE & TIME -->
+        <div class="step-content" id="step3">
+          <h1>Select Date & Time</h1>
+          <p class="subtitle">Pick a slot that works for you.</p>
+
+          <div class="date-time-container">
+            <div class="calendar-wrapper">
+              <input type="date" id="datePicker" class="form-input" />
+            </div>
+            <div class="slots-wrapper" id="slotsContainer">
+              <p style="text-align: center; color: #999; margin-top: 2rem;">Select a date to see available times.</p>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+            <button class="btn btn-primary" onclick="nextStep(4)" id="btnStep3" disabled>Next <i
+                class="ri-arrow-right-line"></i></button>
+          </div>
+        </div>
+
+        <!-- STEP 4: DETAILS -->
+        <div class="step-content" id="step4">
+          <h1>Your Details</h1>
+          <p class="subtitle">Tell us a bit about yourself.</p>
+
+          <form id="bookingForm">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="customerName" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" id="customerEmail" required placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Notes (Optional)</label>
+              <textarea class="form-input" id="customerNotes" rows="3"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+              <button type="submit" class="btn btn-primary">Confirm Booking</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="step-content" id="stepSuccess">
+          <div style="text-align: center; padding: 3rem;">
+            <i class="ri-checkbox-circle-fill" style="font-size: 4rem; color: var(--success);"></i>
+            <h1>Booking Confirmed!</h1>
+            <p class="subtitle">Check your email for the invitation.</p>
+            <a href="../index.html" class="btn btn-primary">Return Home</a>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="booking-footer">
+    © 2025 AppointFlow. All rights reserved.
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact Us</a>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>

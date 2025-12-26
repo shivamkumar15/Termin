@@ -29,10 +29,20 @@ service cloud.firestore {
     // 3. BOOKINGS
     // Public READ/WRITE DENIED (Must use Cloud Functions)
     // Admin READ/DELETE (dashboard)
+    // 3. BOOKINGS
     match /bookings/{bookingId} {
       allow read, delete, update: if isAdmin();
-      allow create: if false; // Deny client-side creation
+      allow create: if true; // Allow client-side creation for now (to test easily), or restrict to admin
     }
-    
+
+    // 4. STAFF
+    match /staff/{staffId} {
+      allow read, write: if isAdmin();
+    }
+
+    // 5. SETTINGS
+    match /settings/{docId} {
+      allow read, write: if isAdmin();
+    }
   }
 }

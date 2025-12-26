@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Services – Termin</title>
 
-    <!-- ICONS -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/reset.css" />
     <link rel="stylesheet" href="../assets/css/variables.css" />
     <link rel="stylesheet" href="../assets/css/layout.css" />
-    <link rel="stylesheet" href="../assets/css/tables.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+    <link rel="stylesheet" href="../assets/css/services.css" />
 </head>
 
 <body>
@@ -22,63 +22,98 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="logo">
-                <img src="../assets/images/logo.png" alt="Termin" />
+                <i class="ri-calendar-check-fill"></i> Termin
             </div>
 
-            <nav>
-                <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
-                <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
-                <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
-                <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
-                <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
-                <a class="active" href="services.html"><i class="ri-service-line"></i> Services</a>
+            <nav class="sidebar-nav">
+                <a class="nav-item" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+                <a class="nav-item" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+                <a class="nav-item active" href="services.html"><i class="ri-service-line"></i> Services</a>
+                <a class="nav-item" href="staff.html"><i class="ri-team-line"></i> Staff</a>
+                <a class="nav-item" href="availability.html"><i class="ri-time-line"></i> Availability</a>
+                <a class="nav-item" href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+                <a class="nav-item" href="payments.html"><i class="ri-bank-card-line"></i> Payments</a>
             </nav>
 
             <div class="sidebar-footer">
-                <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
-                <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
-                <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+                <a class="nav-item" href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+                <a class="nav-item" href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+                <button class="nav-item logout-btn" onclick="logout()"><i class="ri-logout-box-line"></i>
+                    Logout</button>
             </div>
         </aside>
 
         <!-- MAIN -->
-        <main class="main">
+        <main class="main-content">
 
             <header class="topbar">
-                <div class="page-title">
+                <div class="page-header">
                     <h1>Services</h1>
-                    <p>Manage your service offerings.</p>
                 </div>
-                <button class="primary-btn"><i class="ri-add-line"></i> Add Service</button>
+
+                <div class="topbar-actions">
+                    <button class="btn btn-primary">
+                        <i class="ri-add-line"></i> Add Service
+                    </button>
+                    <div class="search-bar">
+                        <i class="ri-search-line"></i>
+                        <input type="text" placeholder="Search..." />
+                    </div>
+                    <button class="notification-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-profile">
+                        <img class="user-avatar"
+                            src="https://ui-avatars.com/api/?name=Raman+Singh&background=06b6d4&color=fff" alt="User" />
+                    </div>
+                </div>
             </header>
 
-            <section class="content">
-                <div class="card">
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Service Name</th>
-                                    <th>Duration</th>
-                                    <th>Price</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Consultation</td>
-                                    <td>30 mins</td>
-                                    <td>$50</td>
-                                    <td><button class="action-btn"><i class="ri-edit-line"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>Follow-up</td>
-                                    <td>15 mins</td>
-                                    <td>$30</td>
-                                    <td><button class="action-btn"><i class="ri-edit-line"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <section class="container-fluid">
+                <!-- Service Cards Grid (Matching Visily Image 4 style but for admin) -->
+                <div class="service-grid" id="serviceGrid">
+                    <!-- Static placeholders, JS can populate dynamically -->
+                    <div class="service-card">
+                        <h3>Standard Consultation</h3>
+                        <p class="service-desc">A comprehensive session to discuss your needs and provide initial
+                            advice.</p>
+                        <div class="service-meta">
+                            <span><i class="ri-time-line"></i> 60 min</span>
+                            <span class="price">$99.00</span>
+                        </div>
+                        <button class="btn btn-secondary btn-sm full-width">Edit Service</button>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Follow-up Session</h3>
+                        <p class="service-desc">A shorter follow-up for reviewing progress, or addressing new questions.
+                        </p>
+                        <div class="service-meta">
+                            <span><i class="ri-time-line"></i> 30 min</span>
+                            <span class="price">$50.00</span>
+                        </div>
+                        <button class="btn btn-secondary btn-sm full-width">Edit Service</button>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Project Kick-off</h3>
+                        <p class="service-desc">An in-depth meeting to define project scope, goals, and team roles.</p>
+                        <div class="service-meta">
+                            <span><i class="ri-time-line"></i> 90 min</span>
+                            <span class="price">$150.00</span>
+                        </div>
+                        <button class="btn btn-secondary btn-sm full-width">Edit Service</button>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Discovery Call</h3>
+                        <p class="service-desc">A quick chat to explore potential collaborations and service fit.</p>
+                        <div class="service-meta">
+                            <span><i class="ri-time-line"></i> 15 min</span>
+                            <span class="price">$0.00</span>
+                        </div>
+                        <button class="btn btn-secondary btn-sm full-width">Edit Service</button>
                     </div>
                 </div>
             </section>

@@ -1,48 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Admin Login – Termin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Termin</title>
 
-  <!-- CSS (VISILY STYLE) -->
   <link rel="stylesheet" href="../assets/css/reset.css">
   <link rel="stylesheet" href="../assets/css/variables.css">
-  <link rel="stylesheet" href="../assets/css/base.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/auth.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="auth-container">
-  <div class="auth-card">
+  <!-- TOP NAV -->
+  <header class="auth-topbar">
+    <div class="logo">
+      <i class="ri-calendar-check-fill"></i> Termin
+    </div>
+    <a href="../index.html">Learn more</a>
+  </header>
 
-    <img src="../assets/images/logo.png" class="logo" alt="Termin logo">
+  <!-- AUTH CONTAINER -->
+  <div class="auth-container">
+    <div class="auth-card">
 
-    <h1>Admin Login</h1>
-    <p class="subtitle">Sign in to manage appointments</p>
+      <h1>Welcome Back!</h1>
+      <p class="subtitle">Sign in to access your dashboard.</p>
 
-    <form id="loginForm">
-      <div class="field">
-        <label>Email</label>
-        <input type="email" id="email" required />
+      <div class="social-login">
+        <a href="#" class="social-btn">
+          <i class="ri-google-fill"></i> Sign in with Google
+        </a>
+        <a href="#" class="social-btn">
+          <i class="ri-github-fill"></i> Sign in with GitHub
+        </a>
       </div>
 
-      <div class="field">
-        <label>Password</label>
-        <input type="password" id="password" required />
+      <div class="divider">OR CONTINUE WITH</div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="john.doe@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+          <i class="ri-eye-line toggle-password"></i>
+        </div>
+
+        <a href="#" class="forgot-password">Forgot password?</a>
+
+        <button type="submit">Sign In</button>
+      </form>
+
+      <p id="error" class="error"></p>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="signup.html">Sign Up</a>
       </div>
 
-      <button type="submit">Login</button>
-    </form>
-
-    <p id="error" class="error"></p>
-
+    </div>
   </div>
-</div>
 
-<script type="module" src="../assets/js/firebase.js"></script>
-<script type="module" src="../assets/js/auth.js"></script>
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    © 2025 . All rights reserved.
+  </footer>
+
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/auth.js"></script>
 
 </body>
+
 </html>

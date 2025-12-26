@@ -22,100 +22,220 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="../assets/images/logo.png" alt="Termin" />
+        <i class="ri-calendar-check-fill"></i> Termin
       </div>
 
-      <nav>
-        <a class="active" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
-        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
-        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
-        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
-        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
-        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a class="nav-item" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a class="nav-item" href="services.html"><i class="ri-service-line"></i> Services</a>
+        <a class="nav-item" href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a class="nav-item" href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a class="nav-item" href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a class="nav-item" href="payments.html"><i class="ri-bank-card-line"></i> Payments</a>
       </nav>
 
       <div class="sidebar-footer">
-        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
-        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
-        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+        <a class="nav-item" href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a class="nav-item" href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="nav-item logout-btn" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
       </div>
     </aside>
 
     <!-- MAIN -->
-    <main class="main">
+    <main class="main-content">
 
       <!-- TOPBAR -->
       <header class="topbar">
-        <div class="page-title">
+        <div class="page-header">
           <h1>Dashboard</h1>
-          <p>Welcome back, Raman!</p>
         </div>
 
-        <div class="topbar-right">
-          <div class="search-box">
+        <div class="topbar-actions">
+          <div class="search-bar">
             <i class="ri-search-line"></i>
-            <input type="text" placeholder="Search bookings..." />
+            <input type="text" placeholder="Search..." />
           </div>
-          <div class="avatar">
-            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          <button class="notification-btn">
+            <i class="ri-notification-3-line"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="user-profile">
+            <!-- Placeholder Avatar -->
+            <img class="user-avatar" src="https://ui-avatars.com/api/?name=Raman+Singh&background=06b6d4&color=fff"
+              alt="User" />
           </div>
         </div>
       </header>
 
       <!-- CONTENT -->
-      <section class="content">
+      <section class="container-fluid content">
 
         <!-- STATS GRID -->
         <div class="cards">
-          <div class="card stat-card">
-            <div class="stat-icon combined-blue"><i class="ri-calendar-check-line"></i></div>
-            <div class="stat-info">
-              <h3>Appointments</h3>
-              <p>128</p>
-              <span class="trend positive"><i class="ri-arrow-up-line"></i> +12%</span>
+          <div class="stat-card" id="stat-appointments">
+            <div class="card-top">
+              <h3>Upcoming Appointments</h3>
+              <i class="ri-calendar-2-line"></i>
+            </div>
+            <div>
+              <p class="stat-value">14</p>
+              <span class="stat-desc">Next 7 days</span>
             </div>
           </div>
 
-          <div class="card stat-card">
-            <div class="stat-icon combined-green"><i class="ri-user-smile-line"></i></div>
-            <div class="stat-info">
+          <div class="stat-card" id="stat-revenue">
+            <div class="card-top">
+              <h3>Total Revenue</h3>
+              <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            <div>
+              <p class="stat-value">$5,230</p>
+              <span class="stat-desc">+18% from last month</span>
+            </div>
+          </div>
+
+          <div class="stat-card" id="stat-customers">
+            <div class="card-top">
               <h3>New Customers</h3>
-              <p>76</p>
-              <span class="trend positive"><i class="ri-arrow-up-line"></i> +4%</span>
+              <i class="ri-user-line"></i>
+            </div>
+            <div>
+              <p class="stat-value">28</p>
+              <span class="stat-desc">Last 30 days</span>
             </div>
           </div>
 
-          <div class="card stat-card">
-            <div class="stat-icon combined-purple"><i class="ri-wallet-3-line"></i></div>
-            <div class="stat-info">
-              <h3>Revenue</h3>
-              <p>₹24,500</p>
-              <span class="trend neutral"><i class="ri-subtract-line"></i> 0%</span>
+          <div class="stat-card" id="stat-utilization">
+            <div class="card-top">
+              <h3>Utilization Rate</h3>
+              <i class="ri-bar-chart-2-line"></i>
             </div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon combined-orange"><i class="ri-percent-line"></i></div>
-            <div class="stat-info">
-              <h3>Utilization</h3>
-              <p>82%</p>
-              <span class="trend negative"><i class="ri-arrow-down-line"></i> -2%</span>
+            <div>
+              <p class="stat-value">75%</p>
+              <span class="stat-desc">Target: 80%</span>
             </div>
           </div>
         </div>
 
-        <!-- RECENT TABLE PLACEHOLDER -->
-        <div class="card recent-activity">
-          <div class="card-header">
-            <h2>Recent Bookings</h2>
-            <a href="appointments.html" class="link-btn">View All</a>
-          </div>
-          <div class="table-wrapper">
-            <!-- Table content would go here -->
-            <div class="empty-state">
-              <i class="ri-inbox-archive-line"></i>
-              <p>No recent bookings found.</p>
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+
+          <!-- LEFT: UPCOMING APPOINTMENTS -->
+          <div class="card upcoming-appointments">
+            <div class="card-header">
+              <h2>Upcoming Appointments</h2>
+              <div class="calendar-nav">
+                <button><i class="ri-arrow-left-s-line"></i></button>
+                <span>December 2025</span>
+                <button><i class="ri-arrow-right-s-line"></i></button>
+              </div>
             </div>
+
+            <div class="mini-calendar">
+              <div class="week-days">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="days-grid">
+                <span
+                  class="inactive">30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+                <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+                <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span
+                  class="active">20</span>
+                <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span
+                  class="selected">27</span>
+                <span>28</span><span>29</span><span>30</span><span>31</span><span class="inactive">1</span><span
+                  class="inactive">2</span><span class="inactive">3</span>
+              </div>
+            </div>
+
+            <div class="upcoming-list" id="upcomingList">
+              <div class="appointment-item">
+                <div class="appt-time">10:00 AM</div>
+                <div class="appt-details">
+                  <h4>Client Consultation with Jane Doe</h4>
+                  <p>Video Call</p>
+                </div>
+              </div>
+              <div class="appointment-item">
+                <div class="appt-time">02:00 PM</div>
+                <div class="appt-details">
+                  <h4>Team Meeting</h4>
+                  <p>Internal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: RECENT ACTIVITY -->
+          <div class="card recent-activity">
+            <div class="card-header">
+              <h2>Recent Activity</h2>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-icon"><i class="ri-notification-3-line"></i></div>
+                <div class="activity-info">
+                  <p>New booking received for 'Deep Tissue Massage' from Alice</p>
+                  <span>2 minutes ago</span>
+                </div>
+                <div class="activity-action"><i class="ri-arrow-right-circle-line"></i></div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon"><i class="ri-scissors-line"></i></div>
+                <div class="activity-info">
+                  <p>Service 'Haircut & Style' was updated</p>
+                  <span>1 hour ago</span>
+                </div>
+                <div class="activity-action"><i class="ri-arrow-right-circle-line"></i></div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon"><i class="ri-user-add-line"></i></div>
+                <div class="activity-info">
+                  <p>New staff member, Dr. Emily White, added to system</p>
+                  <span>Yesterday</span>
+                </div>
+                <div class="activity-action"><i class="ri-arrow-right-circle-line"></i></div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon"><i class="ri-time-line"></i></div>
+                <div class="activity-info">
+                  <p>Availability updated for John Doe on August 15th</p>
+                  <span>2 days ago</span>
+                </div>
+                <div class="activity-action"><i class="ri-arrow-right-circle-line"></i></div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon"><i class="ri-shopping-cart-2-line"></i></div>
+                <div class="activity-info">
+                  <p>Payment processed for 'Full Day Spa Package' from Bob Johnson</p>
+                  <span>3 days ago</span>
+                </div>
+                <div class="activity-action"><i class="ri-arrow-right-circle-line"></i></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="cards" style="margin-top: 2rem;">
+          <!-- Not strictly a grid of cards, but using the flex styling if I want, or just custom buttons -->
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <h3 style="margin-bottom: 1rem; color: var(--text-main); font-size: 1.1rem; font-weight: 600;">Quick Actions
+          </h3>
+          <small style="color: var(--text-tertiary); display: block; margin-bottom: 1rem;">Rapidly create services, add
+            staff, or set availability.</small>
+          <div class="quick-actions-grid">
+            <button class="action-card primary">Create New Service</button>
+            <button class="action-card">Add New Staff</button>
+            <button class="action-card">Set Availability</button>
           </div>
         </div>
 
@@ -123,6 +243,7 @@
 
     </main>
   </div>
+
   <script type="module" src="../assets/js/firebase.js"></script>
   <script type="module" src="../assets/js/layout.js"></script>
   <script type="module" src="../assets/js/dashboard.js"></script>

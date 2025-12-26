@@ -3,14 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account – Termin</title>
 
     <!-- CSS (VISILY STYLE) -->
     <link rel="stylesheet" href="../assets/css/reset.css">
     <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,30 +21,43 @@
     <div class="auth-container">
         <div class="auth-card">
 
-            <img src="../assets/images/logo.png" class="logo" alt="Termin logo">
+            <div class="auth-logo" style="margin-bottom: 1.5rem;">
+                <img src="../assets/images/logo.png" alt="Termin" style="height: 40px; width: auto;" />
+            </div>
 
             <h1>Create Account</h1>
-            <p class="subtitle">Join Termin to manage your appointments</p>
+            <p class="subtitle">Start managing your appointments today.</p>
+
+            <div class="social-login">
+                <a href="#" class="social-btn">
+                    <i class="ri-google-fill"></i> Google
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="ri-github-fill"></i> GitHub
+                </a>
+            </div>
+
+            <div class="divider">Or sign up with</div>
 
             <form id="signupForm">
                 <div class="field">
-                    <label>Email</label>
-                    <input type="email" id="email" required />
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="john.doe@example.com" required />
                 </div>
 
                 <div class="field">
-                    <label>Password</label>
-                    <input type="password" id="password" required />
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required />
                 </div>
 
                 <button type="submit">Sign Up</button>
             </form>
 
-            <p style="margin-top: 1rem; text-align: center; font-size: 0.9rem;">
-                Already have an account? <a href="login.html" style="color: var(--primary);">Log In</a>
-            </p>
-
             <p id="error" class="error"></p>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
 
         </div>
     </div>

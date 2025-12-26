@@ -62,15 +62,30 @@
       </header>
 
       <section class="content">
-        <div class="card">
+
+        <!-- FILTERS -->
+        <div class="filters-bar">
+          <div class="filter-group">
+            <div class="search-input">
+              <i class="ri-search-line"></i>
+              <input type="text" placeholder="Search customers..." />
+            </div>
+          </div>
+          <div class="filter-group">
+            <button class="primary-btn"><i class="ri-user-add-line"></i> Add Customer</button>
+          </div>
+        </div>
+
+        <div class="card table-card">
           <div class="table-wrapper">
             <table>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Appointments</th>
-                  <th>Action</th>
+                  <th style="width: 40px;"><input type="checkbox"></th>
+                  <th>Customer</th>
+                  <th>Contact Info</th>
+                  <th>Bookings History</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
 
@@ -78,6 +93,16 @@
                 <!-- JS injects -->
               </tbody>
             </table>
+          </div>
+
+          <div class="pagination">
+            <span>Showing 1-10 of 50</span>
+            <div class="page-nav">
+              <button><i class="ri-arrow-left-s-line"></i></button>
+              <button class="active">1</button>
+              <button>2</button>
+              <button><i class="ri-arrow-right-s-line"></i></button>
+            </div>
           </div>
         </div>
       </section>

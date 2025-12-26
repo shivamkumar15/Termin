@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Availability – Termin</title>
 
-  <!-- ICONS -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
   <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
   <link rel="stylesheet" href="../assets/css/availability.css" />
 </head>
 
@@ -22,88 +22,116 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="../assets/images/logo.png" alt="Termin" />
+        <i class="ri-calendar-check-fill"></i> Termin
       </div>
-      <nav>
-        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
-        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
-        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
-        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
-        <a class="active" href="availability.html"><i class="ri-time-line"></i> Availability</a>
-        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a class="nav-item" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a class="nav-item" href="services.html"><i class="ri-service-line"></i> Services</a>
+        <a class="nav-item" href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a class="nav-item active" href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a class="nav-item" href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a class="nav-item" href="payments.html"><i class="ri-bank-card-line"></i> Payments</a>
       </nav>
 
       <div class="sidebar-footer">
-        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
-        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
-        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+        <a class="nav-item" href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a class="nav-item" href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="nav-item logout-btn" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
       </div>
     </aside>
 
     <!-- MAIN -->
-    <main class="main">
+    <main class="main-content">
 
       <header class="topbar">
-        <div class="page-title">
+        <div class="page-header">
           <h1>Availability</h1>
-          <p>Set your weekly schedule.</p>
         </div>
-
-        <div class="topbar-right">
-          <div class="search-box">
+        <div class="topbar-actions">
+          <div class="search-bar">
             <i class="ri-search-line"></i>
             <input type="text" placeholder="Search..." />
           </div>
-          <div class="avatar">
-            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          <button class="notification-btn">
+            <i class="ri-notification-3-line"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="user-profile">
+            <img class="user-avatar" src="https://ui-avatars.com/api/?name=Raman+Singh&background=06b6d4&color=fff"
+              alt="User" />
           </div>
         </div>
       </header>
 
-      <section class="content">
-        <div class="card">
-          <div class="card-header-actions"
-            style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
-            <h3>Weekly Schedule</h3>
-            <select id="serviceSelect" style="width: auto; padding: 0.5rem;">
-              <option value="Consultation">Consultation</option>
-              <option value="Follow-up">Follow-up</option>
-              <option value="Therapy Session">Therapy Session</option>
-            </select>
-          </div>
+      <section class="container-fluid">
 
-          <div id="availabilityTable">
-            <!-- JS renders rows -->
-          </div>
+        <!-- Two Column Layout Matching Image 2 -->
+        <div class="availability-layout">
 
-          <div class="footer" style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem;">
-            <label>Slot Duration</label>
-            <select id="slotDuration" style="padding: 0.5rem;">
-              <option value="15">15 minutes</option>
-              <option value="30" selected>30 minutes</option>
-              <option value="60">60 minutes</option>
-            </select>
+          <!-- LEFT: Date Overrides Card -->
+          <div class="card availability-overrides-card">
+            <h3>Date Overrides & Special Dates</h3>
+            <p class="section-desc">Adjust availability for specific dates or mark exceptions. Holidays are highlighted
+              in red, overrides in blue.</p>
 
-            <button class="primary-btn" id="saveBtn">
-              Save Availability
+            <div class="mini-calendar-widget">
+              <div class="calendar-nav">
+                <button class="btn-icon"><i class="ri-arrow-left-s-line"></i></button>
+                <span>December 2025</span>
+                <button class="btn-icon"><i class="ri-arrow-right-s-line"></i></button>
+              </div>
+              <div class="week-days">
+                <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+              </div>
+              <div class="days-grid">
+                <span
+                  class="inactive">30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+                <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+                <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span
+                  class="active">20</span>
+                <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span>
+                <span>28</span><span>29</span><span>30</span><span>31</span><span class="inactive">1</span><span
+                  class="inactive">2</span><span class="inactive">3</span>
+              </div>
+            </div>
+
+            <div class="selected-date-info">
+              <span>Selected Date:</span>
+              <a href="#">December 20th, 2025</a>
+            </div>
+
+            <button class="btn btn-secondary full-width">
+              <i class="ri-add-line"></i> Add Override for Dec 20
             </button>
           </div>
 
-          <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #eee;" />
+          <!-- RIGHT: Actions Panel -->
+          <div class="availability-actions-panel">
+            <button class="btn btn-primary full-width">
+              <i class="ri-add-line"></i> Add Holiday
+            </button>
 
-          <!-- HOLIDAYS SECTION -->
-          <div class="holidays-section">
-            <h3>Holidays & Blackout Dates</h3>
-            <p style="color:#888; margin-bottom: 1rem;">Select a date to block bookings for that day.</p>
-
-            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-              <input type="date" id="holidayDate" style="padding:0.5rem; border:1px solid #ddd; border-radius:6px;">
-              <button class="secondary-btn" id="addHolidayBtn">Add Holiday</button>
+            <div class="upcoming-holidays">
+              <h4>Upcoming Holidays:</h4>
+              <p class="empty-state">No holidays scheduled.</p>
             </div>
 
-            <ul id="holidayList" style="list-style: none; max-width: 400px;">
-              <!-- Holidays injected here -->
-            </ul>
+            <div class="data-management-section">
+              <h4>Data Management</h4>
+              <p class="section-desc">Import, export, or apply bulk changes to your availability.</p>
+
+              <button class="btn btn-secondary full-width">
+                <i class="ri-upload-line"></i> Import Schedule (CSV)
+              </button>
+              <button class="btn btn-secondary full-width">
+                <i class="ri-download-line"></i> Export Schedule (CSV)
+              </button>
+              <button class="btn btn-primary full-width">
+                <i class="ri-edit-box-line"></i> Bulk Edit Availability
+              </button>
+            </div>
           </div>
 
         </div>
