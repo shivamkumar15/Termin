@@ -17,7 +17,7 @@ import {
 //  Protect admin page
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    window.location.href = "/auth/login.html";
+    window.location.href = "../auth/login.html";
   } else {
     loadBookings();
   }
@@ -72,8 +72,8 @@ function attachDeleteEvents() {
   });
 }
 
-//  Logout
-document.getElementById("logoutBtn").addEventListener("click", async () => {
+// LOGOUT exposed for use in templates
+window.logout = async function () {
   await signOut(auth);
-  window.location.href = "./auth/login.html";
-});
+  window.location.href = "../auth/login.html";
+};

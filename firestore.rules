@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: Admin Check
+    function isAdmin() {
+       return request.auth != null; 
+    }
+
+    // 1. AVAILABILITY
+    // Public READ (so booking page works)
+    // Admin WRITE (so dashboard works)
+    match /availability/{document=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 2. HOLIDAYS
+    // Public READ
+    // Admin WRITE
+    match /holidays/{holidayId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 3. BOOKINGS
+    // Public CREATE (anyone can book)
+    // Admin READ/DELETE (dashboard)
+    // 3. BOOKINGS
+    // Public READ/WRITE DENIED (Must use Cloud Functions)
+    // Admin READ/DELETE (dashboard)
+    match /bookings/{bookingId} {
+      allow read, delete, update: if isAdmin();
+      allow create: if false; // Deny client-side creation
+    }
+    
+  }
+}

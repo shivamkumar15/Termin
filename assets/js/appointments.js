@@ -1,49 +1,66 @@
-const appointments = [
-  {
-    customer: "Rahul Sharma",
-    service: "Consultation",
-    staff: "Amit",
-    date: "2025-01-18",
-    time: "10:00 AM",
-    status: "confirmed"
-  },
-  {
-    customer: "Neha Verma",
-    service: "Follow-up",
-    staff: "Pooja",
-    date: "2025-01-19",
-    time: "2:00 PM",
-    status: "pending"
+import { db, auth } from "./firebase.js";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "../auth/login.html";
+  } else {
+    loadAppointments();
   }
-];
+});
 
-const table = document.getElementById("appointmentsTable");
+async function loadAppointments() {
+  const tbody = document.getElementById("appointmentsTable");
+  tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Loading...</td></tr>";
 
-const booking = JSON.parse(localStorage.getItem("termin_booking"));
+  try {
+    const q = query(collection(db, "bookings"), orderBy("date", "desc"));
+    const snap = await getDocs(q);
 
-if (!booking) {
-  table.innerHTML = `
-    <tr>
-      <td colspan="6" style="text-align:center; padding:30px;">
-        No appointments found
-      </td>
-    </tr>
-  `;
-} else {
-  table.innerHTML = `
-    <tr>
-      <td>${booking.name}</td>
-      <td>${booking.service}</td>
-      <td>${booking.date}</td>
-      <td>${booking.time}</td>
-      <td>
-        <span class="platform">${booking.platform}</span>
-      </td>
-      <td>
-        <a href="${booking.meetingLink}" target="_blank" class="join-btn">
-          Join
-        </a>
-      </td>
-    </tr>
-  `;
+    if (snap.empty) {
+      tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>No appointments found.</td></tr>";
+      return;
+    }
+
+    tbody.innerHTML = "";
+    snap.forEach(doc => {
+      const data = doc.data();
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+              <td>
+                <div class="user-info">
+                   <div class="user-avatar">${data.name.charAt(0)}</div>
+                   <div>
+                     <p>${data.name}</p>
+                     <small>${data.email}</small>
+                   </div>
+                </div>
+              </td>
+              <td>${data.service}</td>
+              <td>${data.date}</td>
+              <td>${data.time}</td>
+              <td>${data.platform}</td>
+              <td>
+                <button class="action-btn" title="View Details"><i class="ri-eye-line"></i></button>
+              </td>
+            `;
+      tbody.appendChild(tr);
+    });
+
+  } catch (error) {
+    console.error("Error:", error);
+    tbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:red;'>Error loading data.</td></tr>";
+  }
 }
+
+window.logout = () => {
+  auth.signOut().then(() => {
+    window.location.href = "../auth/login.html";
+  });
+};

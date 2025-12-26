@@ -1,0 +1,10 @@
+{
+    "razorpay": {
+        "key_id": "rzp_test_123456",
+        "key_secret": "secret_123456"
+    },
+    "smtp": {
+        "email": "test@example.com",
+        "password": "pass"
+    }
+}

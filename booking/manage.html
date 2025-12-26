@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Booking | Termin</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <style>
+        body {
+            background-color: #f4f5fa;
+        }
+
+        .manage-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-Paid {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-Confirmed {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-Cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .details-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+            text-align: left;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+        }
+
+        .detail-item label {
+            color: #64748b;
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        .detail-item strong {
+            color: #1e293b;
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="ri-calendar-check-line"></i> Termin
+        </div>
+    </nav>
+
+    <div class="manage-container">
+        <div id="loading" style="text-align:center;">
+            <i class="ri-loader-4-line ri-spin" style="font-size: 2rem; color: var(--primary);"></i>
+            <p>Loading booking details...</p>
+        </div>
+
+        <div id="errorState" class="booking-card" style="display:none; color: red;">
+            <i class="ri-error-warning-line" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h3>Access Denied</h3>
+            <p>Invalid booking link or expired token.</p>
+        </div>
+
+        <div id="bookingContent" class="booking-card" style="display:none;">
+            <span id="bookingStatus" class="status-badge">Confirmed</span>
+            <h1 id="serviceName">Service Name</h1>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <label>Date</label>
+                    <strong id="bookingDate">--</strong>
+                </div>
+                <div class="detail-item">
+                    <label>Time</label>
+                    <strong id="bookingTime">--</strong>
+                </div>
+                <div class="detail-item">
+                    <label>Customer</label>
+                    <strong id="customerName">--</strong>
+                </div>
+            </div>
+
+            <div class="actions" id="actionButtons">
+                <button onclick="openReschedule()" class="btn btn-secondary">Reschedule</button>
+                <button onclick="cancelBooking()" class="btn btn-danger"
+                    style="background: #fee2e2; color: #991b1b; border:none;">Cancel Booking</button>
+            </div>
+            <p id="cancelledMsg" style="display:none; color: #991b1b; margin-top: 1rem;">This booking has been
+                cancelled.</p>
+        </div>
+    </div>
+
+    <!-- Reschedule Modal -->
+    <div id="rescheduleModal" class="modal">
+        <div class="modal-content">
+            <h3>Reschedule Appointment</h3>
+            <div class="form-group" style="margin-top:1rem;">
+                <label>New Date</label>
+                <input type="date" id="newDate" class="form-input">
+            </div>
+            <div id="slotsContainer"
+                style="margin-top:1rem; display:grid; grid-template-columns: repeat(3, 1fr); gap:0.5rem;">
+                <!-- Slots will load here -->
+            </div>
+            <div style="margin-top:1.5rem; text-align:right; gap:0.5rem; display:flex; justify-content:end;">
+                <button onclick="closeReschedule()" class="btn btn-text">Close</button>
+                <button onclick="confirmReschedule()" id="btnConfirmReschedule" class="btn btn-primary" disabled>Confirm
+                    New Time</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
+        import { app } from "../assets/js/firebase.js";
+
+        const functions = getFunctions(app);
+
+        // State
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('id');
+        const token = urlParams.get('token');
+        let currentBooking = null;
+        let selectedNewTime = null;
+
+        // INIT
+        async function loadBooking() {
+            try {
+                const getBookingDetails = httpsCallable(functions, 'getBookingDetails');
+                const result = await getBookingDetails({ bookingId, token });
+                currentBooking = result.data;
+                renderBooking();
+            } catch (error) {
+                console.error(error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
+            }
+        }
+
+        function renderBooking() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('bookingContent').style.display = 'block';
+
+            document.getElementById('serviceName').innerText = currentBooking.service;
+            document.getElementById('bookingDate').innerText = currentBooking.date;
+            document.getElementById('bookingTime').innerText = currentBooking.time;
+            document.getElementById('customerName').innerText = currentBooking.name;
+
+            const statusBadge = document.getElementById('bookingStatus');
+            statusBadge.innerText = currentBooking.status;
+            statusBadge.className = `status-badge status-${currentBooking.status}`;
+
+            if (currentBooking.status === 'Cancelled') {
+                document.getElementById('actionButtons').style.display = 'none';
+                document.getElementById('cancelledMsg').style.display = 'block';
+            }
+        }
+
+        // CANCEL
+        window.cancelBooking = async () => {
+            if (!confirm("Are you sure you want to cancel this booking? This action cannot be undone.")) return;
+
+            const btn = document.querySelector('.btn-danger');
+            btn.innerText = "Cancelling...";
+            btn.disabled = true;
+
+            try {
+                const cancelFn = httpsCallable(functions, 'cancelBooking');
+                await cancelFn({ bookingId, token });
+                alert("Booking cancelled successfully.");
+                location.reload();
+            } catch (error) {
+                alert("Error cancelling: " + error.message);
+                btn.innerText = "Cancel Booking";
+                btn.disabled = false;
+            }
+        };
+
+        // RESCHEDULE
+        window.openReschedule = () => {
+            document.getElementById('rescheduleModal').classList.add('active');
+            // Set min date
+            document.getElementById('newDate').min = new Date().toISOString().split('T')[0];
+        };
+        window.closeReschedule = () => {
+            document.getElementById('rescheduleModal').classList.remove('active');
+        };
+
+        // Date Change Logic (Reuse similar from booking.js)
+        document.getElementById('newDate').addEventListener('change', async (e) => {
+            const date = e.target.value;
+            const container = document.getElementById('slotsContainer');
+            container.innerHTML = "Loading slots...";
+
+            try {
+                const checkAvailability = httpsCallable(functions, 'checkAvailability');
+                const res = await checkAvailability({ date, service: currentBooking.service });
+                const { available, slots } = res.data;
+
+                container.innerHTML = "";
+                if (!available || !slots.length) {
+                    container.innerHTML = "<p>No slots available.</p>";
+                    return;
+                }
+
+                slots.forEach(time => {
+                    const btn = document.createElement('button');
+                    btn.className = 'time-slot'; // Needs CSS
+                    btn.style = "padding:0.5rem; border:1px solid #ccc; background:white; cursor:pointer; border-radius:4px;";
+                    btn.innerText = time;
+                    btn.onclick = () => {
+                        document.querySelectorAll('#slotsContainer button').forEach(b => b.style.background = 'white');
+                        btn.style.background = 'var(--primary)';
+                        btn.style.color = 'white';
+                        selectedNewTime = time;
+                        document.getElementById('btnConfirmReschedule').disabled = false;
+                    };
+                    container.appendChild(btn);
+                });
+
+            } catch (err) {
+                container.innerText = "Error loading slots";
+            }
+        });
+
+        window.confirmReschedule = async () => {
+            const btn = document.getElementById('btnConfirmReschedule');
+            btn.innerText = "Updating...";
+            btn.disabled = true;
+
+            const newDate = document.getElementById('newDate').value;
+
+            try {
+                const rescheduleFn = httpsCallable(functions, 'rescheduleBooking');
+                await rescheduleFn({
+                    bookingId,
+                    token,
+                    newDate,
+                    newTime: selectedNewTime
+                });
+                alert("Booking rescheduled successfully!");
+                location.reload();
+            } catch (err) {
+                alert("Error rescheduling: " + err.message);
+                btn.innerText = "Confirm New Time";
+                btn.disabled = false;
+            }
+        };
+
+        // Start
+        if (bookingId && token) {
+            loadBooking();
+        } else {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+    </script>
+</body>
+
+</html>

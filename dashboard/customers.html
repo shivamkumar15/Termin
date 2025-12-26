@@ -1,57 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customers – Termin</title>
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
   <link rel="stylesheet" href="../assets/css/customers.css" />
 </head>
+
 <body>
 
-<div class="dashboard">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">Termin</div>
-    <nav>
-      <a href="appointments.html">Appointments</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="availability.html">Availability</a>
-      <a href="customers.html" class="active">Customers</a>
-      <a href="#">Settings</a>
-    </nav>
-  </aside>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="Termin" />
+      </div>
 
-  <!-- MAIN -->
-  <main class="content">
+      <nav>
+        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a class="active" href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      </nav>
 
-    <header class="topbar">
-      <h1>Customers</h1>
-    </header>
+      <div class="sidebar-footer">
+        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+      </div>
+    </aside>
 
-    <section class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Appointments</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+    <!-- MAIN -->
+    <main class="main">
 
-        <tbody id="customersTable">
-          <!-- JS injects -->
-        </tbody>
-      </table>
-    </section>
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Customers</h1>
+          <p>Manage your client base.</p>
+        </div>
 
-  </main>
-</div>
-<script type="module" src="../assets/js/firebase.js"></script>
+        <div class="topbar-right">
+          <div class="search-box">
+            <i class="ri-search-line"></i>
+            <input type="text" placeholder="Search customers..." />
+          </div>
+          <div class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          </div>
+        </div>
+      </header>
 
-<script src="../assets/js/customers.js"></script>
+      <section class="content">
+        <div class="card">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Appointments</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="customersTable">
+                <!-- JS injects -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/layout.js"></script>
+  <script type="module" src="../assets/js/customers.js"></script>
 </body>
+
 </html>

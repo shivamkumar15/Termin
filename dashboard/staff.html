@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Staff – Termin</title>
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
   <link rel="stylesheet" href="../assets/css/layout.css" />
   <link rel="stylesheet" href="../assets/css/staff.css" />
 </head>
+
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="../assets/images/logo.png" />
-      <span>Termin</span>
-    </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="Termin" />
+      </div>
 
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="appointments.html">Appointments</a>
-      <a href="customers.html">Customers</a>
-      <a class="active" href="staff.html">Staff</a>
-      <a href="availability.html">Availability</a>
-      <a href="services.html">Services</a>
-      <a href="notifications.html">Notifications</a>
-      <a href="settings.html">Settings</a>
-    </nav>
+      <nav>
+        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a class="active" href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      </nav>
 
-    <button class="logout" onclick="logout()">Logout</button>
-  </aside>
+      <div class="sidebar-footer">
+        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+      </div>
+    </aside>
 
-  <!-- MAIN -->
-  <main class="main">
+    <!-- MAIN -->
+    <main class="main">
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <h1>Staff</h1>
-      <button class="primary-btn">+ Add Staff</button>
-    </header>
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Staff</h1>
+          <p>Manage your team members.</p>
+        </div>
+        <button class="primary-btn"><i class="ri-add-line"></i> Add Staff</button>
+      </header>
 
-    <!-- CONTENT -->
-    <section class="content">
-      <div class="staff-grid" id="staffGrid"></div>
-    </section>
+      <!-- CONTENT -->
+      <section class="content">
+        <div class="staff-grid" id="staffGrid"></div>
+      </section>
 
-  </main>
-</div>
+    </main>
+  </div>
 
-<script src="../assets/js/layout.js"></script>
-<script src="../assets/js/staff.js"></script>
-<script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/layout.js"></script>
+  <script type="module" src="../assets/js/staff.js"></script>
 
 </body>
+
 </html>

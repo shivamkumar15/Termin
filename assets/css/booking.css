@@ -1,80 +1,221 @@
+/* assets/css/booking.css */
+
 body {
-  background: var(--background);
-  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
 .booking-container {
-  min-height: 100vh;
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  min-height: 600px;
+}
+
+.booking-sidebar {
+  width: 35%;
+  background: #f8f9fc;
+  padding: 2rem;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-sidebar .logo {
+  margin-bottom: 2rem;
+}
+
+.booking-sidebar .logo img {
+  height: 32px;
+}
+
+.booking-summary h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.summary-item {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-gray);
+  font-size: 0.95rem;
 }
 
-.booking-card {
-  width: 420px;
-  background: white;
-  padding: 32px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+.summary-item i {
+  color: var(--primary);
 }
 
-.booking-card h1 {
-  font-size: 22px;
-  margin-bottom: 20px;
+.booking-main {
+  flex: 1;
+  padding: 3rem;
 }
 
-.step {
-  margin-bottom: 16px;
+.step-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
 }
 
-.platforms {
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+p.subtitle {
+  color: var(--text-gray);
+  margin-bottom: 2rem;
+}
+
+/* CARDS for Service/Platform */
+.selection-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
-.platform-card {
-  border: 1px solid var(--border-light);
-  padding: 12px;
-  border-radius: var(--radius-sm);
+.selection-card {
+  border: 2px solid #eee;
+  border-radius: 12px;
+  padding: 1.5rem;
   cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.platform-card input {
-  display: none;
+.selection-card:hover {
+  border-color: var(--primary-light);
+  background: #f8f9ff;
 }
 
-
-.platform-card:hover {
+.selection-card.selected {
   border-color: var(--primary);
+  background: #eff6ff;
 }
 
-
-/* Email confirmation text */
-.muted {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 10px;
+.selection-card i {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
 }
-/* 📱 Mobile Booking Page */
-@media (max-width: 600px) {
 
-  .booking-card {
-    width: 100%;
-    height: 100vh;
-    border-radius: 0;
-    padding: 24px;
-    box-shadow: none;
+.selection-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* CALENDAR & SLOTS */
+.date-time-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.calendar-wrapper {
+  flex: 1;
+}
+
+.slots-wrapper {
+  width: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-left: 1px solid #eee;
+  padding-left: 2rem;
+}
+
+.time-slot {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.time-slot:hover {
+  background: var(--primary-light);
+}
+
+.time-slot.selected {
+  background: var(--primary);
+  color: #fff;
+}
+
+.time-slot.disabled {
+  border-color: #eee;
+  color: #ccc;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+/* NAV BUTTONS */
+.form-actions {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .booking-container {
+    flex-direction: column;
   }
 
-  .platforms {
-    grid-template-columns: 1fr;
+  .booking-sidebar {
+    width: 100%;
+    padding: 1.5rem;
+    border-right: none;
+    border-bottom: 1px solid #eee;
   }
 
-  button {
+  .booking-main {
+    padding: 1.5rem;
+  }
+
+  .date-time-container {
+    flex-direction: column;
+  }
+
+  .slots-wrapper {
     width: 100%;
-    padding: 14px;
-    font-size: 16px;
+    border-left: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
   }
 }

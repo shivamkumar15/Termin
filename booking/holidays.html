@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Holidays – Termin</title>
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/variables.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/availability.css">
 </head>
 <body>
 
-<h1> Blackout Dates</h1>
+<div style="max-width:900px;margin:3rem auto;">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h2>Holidays & Blackout Dates</h2>
+      <a href="../dashboard/dashboard.html" class="secondary-btn">Back to Dashboard</a>
+    </div>
 
-<p>Enter dates separated by commas (YYYY-MM-DD)</p>
+    <p style="color:#666;">Add specific dates to block bookings on those days.</p>
 
-<form id="holidayForm">
-  <textarea id="holidayDates" rows="5" cols="40"
-    placeholder="2025-01-26, 2025-03-29"></textarea>
-  <br><br>
-  <button type="submit">Save Holidays</button>
-</form>
+    <form id="holidayForm" style="display:flex;gap:1rem;align-items:center;margin:1rem 0;">
+      <input type="date" id="holidayDate" />
+      <button class="primary-btn" type="submit">Add Holiday</button>
+    </form>
+
+    <ul id="holidayList" style="list-style:none;padding:0;margin-top:1rem;">
+      <!-- holidays injected here -->
+    </ul>
+  </div>
+</div>
 
 <script type="module" src="../assets/js/firebase.js"></script>
 <script type="module" src="../assets/js/holidays.js"></script>

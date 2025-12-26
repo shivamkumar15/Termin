@@ -1,83 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – Termin</title>
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
   <link rel="stylesheet" href="../assets/css/layout.css" />
   <link rel="stylesheet" href="../assets/css/dashboard.css" />
 </head>
+
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="../assets/images/logo.png" alt="Termin" />
-      <span>Termin</span>
-    </div>
-
-    <nav>
-      <a class="active" href="dashboard.html">Dashboard</a>
-      <a href="appointments.html">Appointments</a>
-      <a href="customers.html">Customers</a>
-      <a href="staff.html">Staff</a>
-      <a href="availability.html">Availability</a>
-      <a href="services.html">Services</a>
-      <a href="notifications.html">Notifications</a>
-      <a href="settings.html">Settings</a>
-    </nav>
-
-    <button class="logout" onclick="logout()">Logout</button>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <h1>Dashboard</h1>
-
-      <div class="topbar-right">
-        <input type="text" placeholder="Search..." />
-        <div class="avatar">A</div>
-      </div>
-    </header>
-
-    <!-- CONTENT -->
-    <section class="content">
-
-      <div class="cards">
-        <div class="card">
-          <h3>Appointments</h3>
-          <p>128</p>
-        </div>
-
-        <div class="card">
-          <h3>Customers</h3>
-          <p>76</p>
-        </div>
-
-        <div class="card">
-          <h3>Revenue</h3>
-          <p>₹24,500</p>
-        </div>
-
-        <div class="card">
-          <h3>Utilization</h3>
-          <p>82%</p>
-        </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="Termin" />
       </div>
 
-    </section>
+      <nav>
+        <a class="active" href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      </nav>
 
-  </main>
-</div>
-<script type="module" src="../assets/js/firebase.js"></script>
+      <div class="sidebar-footer">
+        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+      </div>
+    </aside>
 
-<script src="../assets/js/layout.js"></script>
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Dashboard</h1>
+          <p>Welcome back, Raman!</p>
+        </div>
+
+        <div class="topbar-right">
+          <div class="search-box">
+            <i class="ri-search-line"></i>
+            <input type="text" placeholder="Search bookings..." />
+          </div>
+          <div class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="content">
+
+        <!-- STATS GRID -->
+        <div class="cards">
+          <div class="card stat-card">
+            <div class="stat-icon combined-blue"><i class="ri-calendar-check-line"></i></div>
+            <div class="stat-info">
+              <h3>Appointments</h3>
+              <p>128</p>
+              <span class="trend positive"><i class="ri-arrow-up-line"></i> +12%</span>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon combined-green"><i class="ri-user-smile-line"></i></div>
+            <div class="stat-info">
+              <h3>New Customers</h3>
+              <p>76</p>
+              <span class="trend positive"><i class="ri-arrow-up-line"></i> +4%</span>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon combined-purple"><i class="ri-wallet-3-line"></i></div>
+            <div class="stat-info">
+              <h3>Revenue</h3>
+              <p>₹24,500</p>
+              <span class="trend neutral"><i class="ri-subtract-line"></i> 0%</span>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-icon combined-orange"><i class="ri-percent-line"></i></div>
+            <div class="stat-info">
+              <h3>Utilization</h3>
+              <p>82%</p>
+              <span class="trend negative"><i class="ri-arrow-down-line"></i> -2%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENT TABLE PLACEHOLDER -->
+        <div class="card recent-activity">
+          <div class="card-header">
+            <h2>Recent Bookings</h2>
+            <a href="appointments.html" class="link-btn">View All</a>
+          </div>
+          <div class="table-wrapper">
+            <!-- Table content would go here -->
+            <div class="empty-state">
+              <i class="ri-inbox-archive-line"></i>
+              <p>No recent bookings found.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/layout.js"></script>
+  <script type="module" src="../assets/js/dashboard.js"></script>
 </body>
+
 </html>

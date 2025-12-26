@@ -1,60 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appointments – Termin</title>
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
   <link rel="stylesheet" href="../assets/css/appointments.css" />
 </head>
+
 <body>
 
-<div class="dashboard">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">Termin</div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="Termin" />
+      </div>
 
-    <nav>
-      <a href="appointments.html" class="active">Appointments</a>
-      <a href="#">Customers</a>
-      <a href="#">Staff</a>
-      <a href="#">Availability</a>
-      <a href="#">Settings</a>
-    </nav>
-  </aside>
+      <nav>
+        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a class="active" href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      </nav>
 
-  <!-- MAIN -->
-  <main class="content">
+      <div class="sidebar-footer">
+        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+      </div>
+    </aside>
 
-    <header class="topbar">
-      <h1>Appointments</h1>
-    </header>
+    <!-- MAIN -->
+    <main class="main">
 
-    <section class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Service</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Platform</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Appointments</h1>
+          <p>Manage your upcoming bookings.</p>
+        </div>
 
-        <tbody id="appointmentsTable">
-          <!-- JS will inject rows -->
-        </tbody>
-      </table>
-    </section>
+        <div class="topbar-right">
+          <div class="search-box">
+            <i class="ri-search-line"></i>
+            <input type="text" placeholder="Search bookings..." />
+          </div>
+          <div class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          </div>
+        </div>
+      </header>
 
-  </main>
-</div>
-<script type="module" src="../assets/js/firebase.js"></script>
+      <!-- CONTENT -->
+      <section class="content">
 
-<script src="../assets/js/appointments.js"></script>
+        <div class="card">
+          <div class="card-header">
+            <h2>All Appointments</h2>
+            <div class="actions">
+              <!-- Add filters or buttons here if needed -->
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Service</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Platform</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="appointmentsTable">
+                <!-- JS will inject rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/layout.js"></script>
+  <script type="module" src="../assets/js/appointments.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services – Termin</title>
+
+    <!-- ICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/variables.css" />
+    <link rel="stylesheet" href="../assets/css/layout.css" />
+    <link rel="stylesheet" href="../assets/css/tables.css" />
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Termin" />
+            </div>
+
+            <nav>
+                <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+                <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+                <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+                <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
+                <a href="availability.html"><i class="ri-time-line"></i> Availability</a>
+                <a class="active" href="services.html"><i class="ri-service-line"></i> Services</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+                <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+                <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <header class="topbar">
+                <div class="page-title">
+                    <h1>Services</h1>
+                    <p>Manage your service offerings.</p>
+                </div>
+                <button class="primary-btn"><i class="ri-add-line"></i> Add Service</button>
+            </header>
+
+            <section class="content">
+                <div class="card">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Consultation</td>
+                                    <td>30 mins</td>
+                                    <td>$50</td>
+                                    <td><button class="action-btn"><i class="ri-edit-line"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>Follow-up</td>
+                                    <td>15 mins</td>
+                                    <td>$30</td>
+                                    <td><button class="action-btn"><i class="ri-edit-line"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script type="module" src="../assets/js/firebase.js"></script>
+    <script type="module" src="../assets/js/layout.js"></script>
+</body>
+
+</html>

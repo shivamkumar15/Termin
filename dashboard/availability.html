@@ -1,63 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Availability – Termin</title>
+
+  <!-- ICONS -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/reset.css" />
   <link rel="stylesheet" href="../assets/css/variables.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
   <link rel="stylesheet" href="../assets/css/availability.css" />
 </head>
+
 <body>
 
-<div class="dashboard">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">Termin</div>
-    <nav>
-      <a href="appointments.html">Appointments</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="availability.html" class="active">Availability</a>
-      <a href="#">Customers</a>
-      <a href="#">Settings</a>
-    </nav>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="content">
-
-    <header class="topbar">
-      <h1>Availability</h1>
-    </header>
-
-    <section class="card">
-
-      <h3>Weekly Schedule</h3>
-
-      <div id="availabilityTable">
-        <!-- JS renders rows -->
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../assets/images/logo.png" alt="Termin" />
       </div>
+      <nav>
+        <a href="dashboard.html"><i class="ri-dashboard-3-line"></i> Dashboard</a>
+        <a href="appointments.html"><i class="ri-calendar-event-line"></i> Appointments</a>
+        <a href="customers.html"><i class="ri-user-heart-line"></i> Customers</a>
+        <a href="staff.html"><i class="ri-team-line"></i> Staff</a>
+        <a class="active" href="availability.html"><i class="ri-time-line"></i> Availability</a>
+        <a href="services.html"><i class="ri-service-line"></i> Services</a>
+      </nav>
 
-      <div class="footer">
-        <label>Slot Duration</label>
-        <select id="slotDuration">
-          <option value="15">15 minutes</option>
-          <option value="30" selected>30 minutes</option>
-          <option value="60">60 minutes</option>
-        </select>
-
-        <button class="primary-btn" onclick="saveAvailability()">
-          Save Availability
-        </button>
+      <div class="sidebar-footer">
+        <a href="notifications.html"><i class="ri-notification-3-line"></i> Notifications</a>
+        <a href="settings.html"><i class="ri-settings-4-line"></i> Settings</a>
+        <button class="logout" onclick="logout()"><i class="ri-logout-box-line"></i> Logout</button>
       </div>
+    </aside>
 
-    </section>
+    <!-- MAIN -->
+    <main class="main">
 
-  </main>
-</div>
-<script type="module" src="../assets/js/firebase.js"></script>
+      <header class="topbar">
+        <div class="page-title">
+          <h1>Availability</h1>
+          <p>Set your weekly schedule.</p>
+        </div>
 
-<script src="../assets/js/availability.js"></script>
+        <div class="topbar-right">
+          <div class="search-box">
+            <i class="ri-search-line"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <div class="avatar">
+            <img src="https://ui-avatars.com/api/?name=Raman+Singh&background=6366f1&color=fff" alt="User" />
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="card">
+          <div class="card-header-actions"
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+            <h3>Weekly Schedule</h3>
+            <select id="serviceSelect" style="width: auto; padding: 0.5rem;">
+              <option value="Consultation">Consultation</option>
+              <option value="Follow-up">Follow-up</option>
+              <option value="Therapy Session">Therapy Session</option>
+            </select>
+          </div>
+
+          <div id="availabilityTable">
+            <!-- JS renders rows -->
+          </div>
+
+          <div class="footer" style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem;">
+            <label>Slot Duration</label>
+            <select id="slotDuration" style="padding: 0.5rem;">
+              <option value="15">15 minutes</option>
+              <option value="30" selected>30 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+
+            <button class="primary-btn" id="saveBtn">
+              Save Availability
+            </button>
+          </div>
+
+          <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #eee;" />
+
+          <!-- HOLIDAYS SECTION -->
+          <div class="holidays-section">
+            <h3>Holidays & Blackout Dates</h3>
+            <p style="color:#888; margin-bottom: 1rem;">Select a date to block bookings for that day.</p>
+
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+              <input type="date" id="holidayDate" style="padding:0.5rem; border:1px solid #ddd; border-radius:6px;">
+              <button class="secondary-btn" id="addHolidayBtn">Add Holiday</button>
+            </div>
+
+            <ul id="holidayList" style="list-style: none; max-width: 400px;">
+              <!-- Holidays injected here -->
+            </ul>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+  <script type="module" src="../assets/js/firebase.js"></script>
+  <script type="module" src="../assets/js/layout.js"></script>
+  <script type="module" src="../assets/js/availability.js"></script>
 </body>
+
 </html>
